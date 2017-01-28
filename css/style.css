@@ -1,0 +1,54 @@
+
+h1 {
+    color:#85440a;
+}
+.hold{
+    color: red;
+}
+
+.logo {
+    z-index:10;
+    position:absolute;
+    margin-left:-128px;
+}
+.bookTitle{
+    font-size:150%;
+    font-weight:bold;
+    line-height:1.0;
+}
+.book {
+    width:30%;
+    min-width:250px;
+    height:180px;
+    float:left;
+    border:2px solid #eee;
+    padding:5px;
+    margin:5px;
+    display:block;
+    color:#666;
+}
+
+.book img {
+    float:left;
+}
+#bookTitle{
+    padding-bottom: 20px;
+}
+
+.centered{
+    text-align: center;
+}
+.book .t {
+    font-size:140%;
+    font-weight:bold;
+    line-height:1.0;
+}
+.centered-button{
+    margin-top: 20px;
+    width:100%
+}
+.prefix{
+    font-size:125%;
+    font-weight:bold;
+}
+

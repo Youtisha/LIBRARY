@@ -1,0 +1,65 @@
+{% set books_active = 1 %}
+{% extends 'layout.html.twig' %}
+{% block contents %}
+    {% if returnSuccess is defined %}
+        <div class="alert alert-success loginsuccess">
+            L'exemplaire a bien été retourné
+        </div>
+    {% endif %}
+    {% for book in bookDetails %}
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ app.request.basepath }}/uploads/{{ book.image }}.jpg" />
+            </div>
+            <div class="col-md-4">
+                <div class="row" id="bookTitle">
+                    <span class="bookTitle">{{ book.titre }}</span>
+                </div>
+                <div class="row">
+                    <p><span class="prefix">Synopsis :</span> {{ book.synopsis }}</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <p class="bookTitle centered">Exemplaires existante du livre</p>
+				<span>Ce livre existe actuellement il y a <span class="prefix">{{ copiesNumber }}</span> exemplaires de ce livre et <span class="prefix">{{ holdCopies }}</span> sont disponibles.</span>
+           
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Identifiant</th>
+						 {% if app.session.get('admin') %}
+						 <th>Emprunter</th>
+						 {% endif %}
+						 {% if app.session.get('admin') %}
+                           <th>Return</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for copy in bookCopies %}
+                            <tr>
+                                {% if copy.hold == 1 %}
+                                <td class="hold">{{ copy.id }} (Reserved)</td>
+                                {% else %}
+                                <td>{{ copy.id }}</td>
+                                {% endif %}
+								{% if app.session.get('admin') %}
+                                <td>
+                                <a href="{{ path('newEmprunt',{'copyId': copy.id }) }}" class="btn btn-info btn-sm" role="button">Lend Me</a>
+                                </td>
+                                {% endif %}
+								{% if app.session.get('admin') and copy.hold == 1  %}
+                                   <td>
+                                       <a href="{{ path('RetourEmprunt',{'copyId': copy.id }) }}" class="btn btn-success btn-sm" role="button">Return</a>
+                                   </td>
+                               {% else %}
+                                   <td></td>
+                               {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

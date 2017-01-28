@@ -1,0 +1,55 @@
+{% set books_active = 1 %}
+{% extends 'layout.html.twig' %}
+
+{% block contents %}
+
+{% if sendEmprunt is defined %}
+    {% if sendEmprunt == 1 %}
+        {% if successEmprunt == 1 %}
+            <div class="alert alert-success loginsuccess">
+                Le livre a bien été réservé!!!!!!
+            </div>
+        {% else %}
+            <div class="alert alert-warning loginsuccess">
+                Le livre est réserver...Désolé!!!!!
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}
+<p class="bookTitle centered">Emprunté l'exemplaire {{ empruntId }}</p>
+    <form class="form-inline" method="post">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Book n°</div>
+                        <input type="text" class="form-control" id="copyId" name="copyId" value="{{ empruntId }}" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Emprunté par</div>
+                        <input type="text" class="form-control" id="bookHolder" name="bookHolder">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Date return</div>
+                        <input type="text" class="form-control" id="returnDate" name="returnDate" placeholder="Format : JJ/MM/AAAA">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+                <button type="submit" class="btn btn-primary centered-button">Réserver</button>
+        </div>
+    </div>
+    </form>
+{% endblock %}
